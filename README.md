@@ -5,8 +5,8 @@ Custom plugins used accross appium modules
 
 ## transpile plugin
 
-Traceur compilation, sourcemaps and file renaming functionality in one plugin. `.es7.js` and `.es6.js` files will be automatically
-renamed to `.js files`. The necessary sourcemaps and traceur comments and imports are also automatically added.
+6to5 compilation, sourcemaps and file renaming functionality in one plugin. `.es7.js` and `.es6.js` files will be automatically
+renamed to `.js files`. The necessary sourcemaps and 6to5 comments and imports are also automatically added.
 
 ### usage
 
@@ -18,7 +18,7 @@ Transpiler = require('appium-gulp-plugins').Transpiler;
 
 gulp.task('transpile', function () {
   var transpiler = new Transpiler();
-  // traceur options are configurable in transpiler.traceurOpts
+  // 6to5 options are configurable in transpiler.transpileOpts
 
   return gulp.src('test/fixtures/es7/**/*.js')
     .pipe(transpiler.stream())
@@ -35,10 +35,10 @@ Regular lib files do not need any extra comments.
 
 ### with gulp-mocha
 
-Set the following env variable to skip the traceur runtime declaration.
+Set the following env variable to skip the 6to5 runtime declaration.
 
 ```js
-process.env.SKIP_TRACEUR_RUNTIME = true;
+process.env.SKIP_6to5_RUNTIME = true;
 ```
 
 ### rtts-assert
@@ -96,7 +96,7 @@ gulp.task('transpile', function () {
 });
 
 gulp.task('test', ['transpile'] , function () {
-  process.env.SKIP_TRACEUR_RUNTIME = true;
+  process.env.SKIP_6to5_RUNTIME = true;
   return gulp.src('build/test/a-specs.js')
     .pipe(mocha())
     .on('error', spawnWatcher.handleError);
